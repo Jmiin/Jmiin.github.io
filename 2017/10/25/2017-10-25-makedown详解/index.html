@@ -5,10 +5,6 @@
   <!-- SEO相关 -->
   
     
-      
-        <meta name="robots" content="index,follow">
-      
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -20,11 +16,11 @@
 
   <!-- 页面元数据 -->
   
-  <title>JmiinBlog</title>
+  <title>markdown详解 - JmiinBlog</title>
+  
+    <meta name="keywords" content="markdown">
   
 
-  
-    <meta name="description" content="靡不有初，鲜克有终。">
   
 
   <!-- feed -->
@@ -334,7 +330,7 @@
 
   
   
-      <div class='cover-wrapper  search' style="display: none;">
+      <div class='cover-wrapper post search' style="display: none;">
         
           <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
         
@@ -380,8 +376,8 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">markdown详解</div>
   <div id="pjax-enable-cover">true</div>
   <div id="pjax-comment-path"></div>
   <div id="pjax-comment-placeholder"></div>
@@ -390,14 +386,14 @@
 
 <script>
   // 处理封面 此时 jquery 还没加载
-  if ("full" == "none") { // 移除封面
+  if ("none" == "none") { // 移除封面
     document.getElementsByClassName('cover-wrapper')[0].style.display = "none";
     document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show");
   } else {
-    if ("full" == "half") { // 半屏
+    if ("none" == "half") { // 半屏
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half');
       document.getElementsByClassName('scroll-down')[0].style.display = "none";
-    } else if ("full" == "full") { // 全屏
+    } else if ("none" == "full") { // 全屏
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full');
       document.getElementsByClassName('scroll-down')[0].style.display = "";
     }
@@ -411,54 +407,184 @@
         
 
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
-  <section class="post-list">
+
+
+  
+  <div class="article-meta" id="top">
     
+    
+    
+      <h1 class="title">
+        markdown详解
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="">
+    <p></p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Oct 25, 2017</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="markdown详解" data-path="/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客转载请标明出处! </p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://jmiin.github.io/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/>http://jmiin.github.io/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
       
         
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-16T13:32:12+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jun 16, 2020</p>
+  </a>
+</div>
+
         
       
-    
-    
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/markdown/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>markdown</p></a></div>
+
+
+        
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/">
-        生活很苦，人生不苦!
-      </a>
-    </h2>
-  
-  <div class='md'>
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
       
-            生活就像一面镜子
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://jmiin.github.io/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/&title=markdown详解 - JmiinBlog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://jmiin.github.io/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/&title=markdown详解 - JmiinBlog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://jmiin.github.io/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/&title=markdown详解 - JmiinBlog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>生活很苦，人生不苦!</p>
+          <p class='content'>    生活就像一面镜子
 
     你赠予它微笑，它回馈你美貌
 
@@ -470,94 +596,13 @@
 
 　　笑颜常开乃易事
 
-　　而在面对挫折时仍能乐观
-
-　　希望就像灿烂的阳光
-
-　　带着坚定的信念
-
-　　突破重重云层
-
+　　而在面对挫折时仍...</p>
+        </a>
       
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-06-16</time>
-        
-      </div>
       
-        <div>
-            <a class='readmore' href='/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/">
-        markdown详解
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-25</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/25/2017-10-25-makedown%E8%AF%A6%E8%A7%A3/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
-        Mysql简笔
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        启动服务    net start mysql
+        <a class='next' href='/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/'>
+          <p class='title'>Mysql简笔<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>启动服务    net start mysql
     net stop mysql
 
 
@@ -565,377 +610,28 @@
 输入用户名密码。
 
         mysql -u 用户名 -p
-        如：mysql -u root -p
-效果如下：
-
-查看基本命令
-每条命令结束后一定要加分号
-
-1.show databases; 查看数据库
-
-2.use 数据库;  选择数据库并使用它
-
-这里我提前新...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-24</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/'>
-            Read More
-          </a>
-        </div>
+        如：...</p>
+        </a>
       
     </div>
   
+</article>
 
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
 </div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/">
-        递归的时间复杂度
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Master定理
-有些算法在处理一个较大规模的问题时，往往会把问题拆分成几个子问题，对其中的一个或多个问题递归地处理，并在分治之前或之后进行一些预处理、汇总处理。这时候我们可以得到关于这个算法复杂度的一个递推方程，求解此方程便能得到算法的复杂度。其中很常见的一种递推方程就是这样的：
-
-设常数a &gt;= 1，b &gt; 1，f(n)为函数，T(n)为非负整数，T(n) = a T(n /...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-22</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/21/2017-10-21-T2%E5%AE%9A%E6%97%B6%E5%99%A8/">
-        单片机
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        实验三思考题：
-若系统时钟频率为12MHz，编写软件实现：按一下K键，产生一次外部中断1中断信号，启动T2定时，使P1.1输出周期为2秒的方波。
+  </article>
 
 
-定时器T2,reg52.h没有T2MOD寄存器,regx55.h有T2MOD寄存器而且sbit已经定义。因此头文件用reg55.h。
-参考代码:123456789101112131415161718192021222324252627#incl...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-21</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/21/2017-10-21-T2%E5%AE%9A%E6%97%B6%E5%99%A8/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/21/2017-10-21-jekyll/">
-        Jekyll
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Jekyll
-Jekyll网站的目录结构。
 
 
-.
-├── _config.yml
-├── _data
-|   └── members.yml
-├── _drafts
-|   ├── begin-with-the-crazy-ideas.md
-|   └── on-simplicity-in-technology.md
-├── _includes
-|   ├── footer.html
-| ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-21</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/21/2017-10-21-jekyll/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/20/2017-10-20-%E5%81%87%E5%A6%82%E7%94%9F%E6%B4%BB%E6%AC%BA%E9%AA%97%E4%BA%86%E4%BD%A0/">
-        假如生活欺骗了你
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        假如生活欺骗了你
-《假如生活欺骗了你》是俄国诗人普希金于1825年流放南俄敖德萨同当地总督发生冲突后，被押送到其父亲的领地米哈伊洛夫斯科耶村幽禁期间创作的一首诗歌。诗歌全文表述了一种积极乐观而坚强的人生态度，并且因它亲切和蔼的口气让许多人把它记于自己的笔记本上，成为了激励自己勇往直前，永不放弃的座右铭。
-
-If by Life You Were Deceived               ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-20</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/20/2017-10-20-%E5%81%87%E5%A6%82%E7%94%9F%E6%B4%BB%E6%AC%BA%E9%AA%97%E4%BA%86%E4%BD%A0/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/20/2017-10-20-rose/">
-        The Rose
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        The Rose                        Some say love it is a river
-
-                        That drowns the tender reed
-
-                        Some say love it is a razor
-
-                        That l...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-20</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/20/2017-10-20-rose/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/20/2017-10-24-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-        动态规划
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        什么是动态规划（DP）？
- DP起源于运筹学，是求解决策过程最优化的数学方法，它一种是将多阶段过程转化为一系列单阶段问题，再利用各阶段之间的关系，逐个求解的方法。即动态规划算法通常基于一个递推公式及一个或多个初始状态。当前子问题的解将由上一次子问题的解推出。使用动态规划来解题只需要多项式时间复杂度，因此它比回溯法、暴力法等要快许多。
-
-动态规划干什么用？
-求解决策过程最优化。因此动态规划算法...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-20</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/20/2017-10-24-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/19/2017-10-19-%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/">
-        Hello,world!
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Hey
-Hello World 中文意思是『世界，你好』。因为《The C Programme Language》中使用它做为第一个演示程序，非常著名，所以后来的程序员在学习编程或进行设备调试时延续了这一习惯。
-
-Java12345678package text1;public class A &#123;	public static void main(String[] args) &#1...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-19</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/19/2017-10-19-%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-  
 
 
 </div>
@@ -945,98 +641,8 @@ Java12345678package text1;public class A &#123;	public static void main(String[]
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">JmiinBlog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
 
 
-    <div class='content'>
-      <a href="/tags/Algorithms/" style="font-size: 19px; color: #777">Algorithms</a> <a href="/tags/Mysql/" style="font-size: 14px; color: #999">Mysql</a> <a href="/tags/markdown/" style="font-size: 14px; color: #999">markdown</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 14px; color: #999">单片机</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 24px; color: #555">生活</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 14px; color: #999">科技</a>
-    </div>
-  </section>
-
-
-  
 
   
 

@@ -5,9 +5,7 @@
   <!-- SEO相关 -->
   
     
-      
-        <meta name="robots" content="index,follow">
-      
+      <meta name="robots" content="noindex,follow">
     
   
   <!-- 渲染优化 -->
@@ -20,11 +18,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>JmiinBlog</title>
+  <title>Archive: 2017/10 - JmiinBlog</title>
   
 
-  
-    <meta name="description" content="靡不有初，鲜克有终。">
   
 
   <!-- feed -->
@@ -390,14 +386,14 @@
 
 <script>
   // 处理封面 此时 jquery 还没加载
-  if ("full" == "none") { // 移除封面
+  if ("none" == "none") { // 移除封面
     document.getElementsByClassName('cover-wrapper')[0].style.display = "none";
     document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show");
   } else {
-    if ("full" == "half") { // 半屏
+    if ("none" == "half") { // 半屏
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half');
       document.getElementsByClassName('scroll-down')[0].style.display = "none";
-    } else if ("full" == "full") { // 全屏
+    } else if ("none" == "full") { // 全屏
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full');
       document.getElementsByClassName('scroll-down')[0].style.display = "";
     }
@@ -411,14 +407,12 @@
         
 
 <div class='l_main'>
-  
+	
+		
   <section class="post-list">
     
       
         
-        
-          
-        
           
         
           
@@ -440,67 +434,6 @@
       
     
     
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/">
-        生活很苦，人生不苦!
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-            生活就像一面镜子
-
-    你赠予它微笑，它回馈你美貌
-
-    你充斥着怒气，它回馈你丑陋
-
-    当生活像一首歌那样
-
-　　轻快流畅时
-
-　　笑颜常开乃易事
-
-　　而在面对挫折时仍能乐观
-
-　　希望就像灿烂的阳光
-
-　　带着坚定的信念
-
-　　突破重重云层
-
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-06-16</time>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
       
         
           <div class='post-wrapper'>
@@ -938,6 +871,7 @@ Java12345678package text1;public class A &#123;	public static void main(String[]
   
 
 
+	
 </div>
 <aside class='l_side'>
   
@@ -1042,7 +976,6 @@ Java12345678package text1;public class A &#123;	public static void main(String[]
 
 
 </aside>
-
 
 
       </div>
