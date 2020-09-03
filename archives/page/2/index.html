@@ -5,6 +5,8 @@
   <!-- SEO相关 -->
   
     
+      <meta name="robots" content="noindex,follow">
+    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -16,9 +18,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>递归的时间复杂度 - JmiinBlog</title>
-  
-    <meta name="keywords" content="Algorithms">
+  <title>Archive - JmiinBlog</title>
   
 
   
@@ -82,8 +82,6 @@
       
         
         <a class="title flat-box" target="_self" href='/'>
-          
-            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
           
           
           
@@ -330,7 +328,7 @@
 
   
   
-      <div class='cover-wrapper post search' style="display: none;">
+      <div class='cover-wrapper  search' style="display: none;">
         
           <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
         
@@ -376,8 +374,8 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">true</div>
-  <div id="pjax-pageTitle">递归的时间复杂度</div>
+  <div id="pjax-ispage">false</div>
+  <div id="pjax-pageTitle"></div>
   <div id="pjax-enable-cover">true</div>
   <div id="pjax-comment-path"></div>
   <div id="pjax-comment-placeholder"></div>
@@ -407,232 +405,194 @@
         
 
 <div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
-  
-
-
-  
-  <div class="article-meta" id="top">
-    
-    
-    
-      <h1 class="title">
-        递归的时间复杂度
-      </h1>
-      <div class='new-meta-box'>
-        
-          
-            
-<div class='new-meta-item author'>
-  <a class='author' href="" rel="nofollow">
-    <img no-lazy src="">
-    <p></p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Oct 22, 2017</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  <div class="new-meta-item browse leancloud">
-    <a class='notlink'>
-      
-      <div id="lc-pv" data-title="递归的时间复杂度" data-path="/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/">
-        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-        次浏览
-      </div>
-    </a>
-  </div>
-
-
-          
-        
-      </div>
-    
-  </div>
-
-
-  
-  
-  <h2 id="Master定理"><a href="#Master定理" class="headerlink" title="Master定理"></a>Master定理</h2><blockquote>
-<p>有些算法在处理一个较大规模的问题时，往往会把问题拆分成几个子问题，对其中的一个或多个问题递归地处理，并在分治之前或之后进行一些预处理、汇总处理。这时候我们可以得到关于这个算法复杂度的一个递推方程，求解此方程便能得到算法的复杂度。其中很常见的一种递推方程就是这样的：</p>
-</blockquote>
-<p>设常数a &gt;= 1，b &gt; 1，f(n)为函数，T(n)为非负整数，T(n) = a T(n / b) + f(n)，则有：</p>
-<p><img src="http://aaa-1255318572.coscd.myqcloud.com/Master.PNG" class="lazyload" data-srcset="http://aaa-1255318572.coscd.myqcloud.com/Master.PNG" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<hr>
-<h2 id="递归树"><a href="#递归树" class="headerlink" title="递归树"></a><a target="_blank" rel="noopener" href="http://blog.csdn.net/u012593447/article/details/47168335">递归树</a></h2><p>没事间写QAQ………</p>
-
-  
-    
-    <div class='footer'>
-      
-      
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客转载请标明出处! </p>
-
-              
-            
-              
-                <p>本文永久链接是：<a href=http://jmiin.github.io/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/>http://jmiin.github.io/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/</a></p>
-              
-            
-          </blockquote>
-        </div>
-      
-      
-    </div>
-  
-  
-    
-
-
-  <div class='article-meta' id="bottom">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-16T12:48:33+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Jun 16, 2020</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Algorithms/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Algorithms</p></a></div>
-
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://jmiin.github.io/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/&title=递归的时间复杂度 - JmiinBlog&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://jmiin.github.io/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/&title=递归的时间复杂度 - JmiinBlog&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://jmiin.github.io/2017/10/22/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/&title=递归的时间复杂度 - JmiinBlog&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-
-
-        
-      
-    </div>
-  </div>
-
-
-  
-  
-
-  
-    <div class="prev-next">
-      
-        <a class='prev' href='/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Mysql简笔</p>
-          <p class='content'>启动服务    net start mysql
-    net stop mysql
-
-
-进入mysql
-输入用户名密码。
-
-        mysql -u 用户名 -p
-        如：...</p>
-        </a>
-      
-      
-        <a class='next' href='/2017/10/21/2017-10-21-T2%E5%AE%9A%E6%97%B6%E5%99%A8/'>
-          <p class='title'>单片机<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>实验三思考题：
-若系统时钟频率为12MHz，编写软件实现：按一下K键，产生一次外部中断1中断信号，启动T2定时，使P1.1输出周期为2秒的方波。
-
-
-定时器T2,reg52.h没有T2MOD寄存...</p>
-        </a>
-      
-    </div>
-  
-</article>
-
-
-  
-
-  <article class="post white-box reveal shadow" id="comments">
-    <p ct><i class='fas fa-comments'></i> 评论</p>
-    
-    <div id="valine_container" class="valine_thread">
-  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-</div>
-
-  </article>
-
-
-
-
-
-
+	
+	  <article id="arc" class="post article white-box reveal shadow">
+			
+			
+				
+				
+					
+						
+						<h2>2020</h2>
+					
+						<div class='timenode'>
+								<a class="meta" href="/2020/09/03/2020-09-03-java%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/">
+									<time>09-03</time>
+									
+										Java常用关键字
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2020/09/01/2020-09-01-%E9%9B%86%E5%90%88/">
+									<time>09-01</time>
+									
+										集合概览
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/">
+									<time>06-16</time>
+									
+										生活很苦，人生不苦!
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						
+						<h2>2017</h2>
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+									<time>10-24</time>
+									
+										Mysql简笔
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/24/2017-10-24-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+									<time>10-24</time>
+									
+										动态规划
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/21/2017-10-21-jekyll/">
+									<time>10-21</time>
+									
+										Jekyll
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/21/2017-10-21-T2%E5%AE%9A%E6%97%B6%E5%99%A8/">
+									<time>10-21</time>
+									
+										单片机
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/21/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/">
+									<time>10-21</time>
+									
+										递归的时间复杂度
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/20/2017-10-20-rose/">
+									<time>10-20</time>
+									
+										The Rose
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/20/2017-10-20-%E5%81%87%E5%A6%82%E7%94%9F%E6%B4%BB%E6%AC%BA%E9%AA%97%E4%BA%86%E4%BD%A0/">
+									<time>10-20</time>
+									
+										假如生活欺骗了你
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2017/10/19/2017-10-19-%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/">
+									<time>10-19</time>
+									
+										Hello,world!
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+	  </article>
+	
 </div>
 <aside class='l_side'>
   
@@ -640,28 +600,103 @@
     
     
 
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img no-lazy src='https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/img/1.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">JmiinBlog</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/volantis-x/"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
 
+  
 
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+  
+    
+    
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop mobile">
     
   <header>
     
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
     
   </header>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Master%E5%AE%9A%E7%90%86"><span class="toc-text">Master定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E6%A0%91"><span class="toc-text">递归树</span></a></li></ol>
+      <a href="/tags/Algorithms/" style="font-size: 19px; color: #777">Algorithms</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Java%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">Java集合</a> <a href="/tags/Mysql/" style="font-size: 14px; color: #999">Mysql</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 14px; color: #999">单片机</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 24px; color: #555">生活</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 14px; color: #999">科技</a>
     </div>
   </section>
 
 
   
 
+  
+
 
 </aside>
-
 
 
       </div>
@@ -683,7 +718,7 @@
         <div class="social-wrapper">
           
             
-              <a href="/atom.xml"
+              <a href="/"
                 class="social  flat-btn"
                 target="_blank"
                 rel="external nofollow noopener noreferrer">
@@ -696,7 +731,7 @@
             
           
             
-              <a href="https://github.com/volantis-x/"
+              <a href="/"
                 class="social  flat-btn"
                 target="_blank"
                 rel="external nofollow noopener noreferrer">
