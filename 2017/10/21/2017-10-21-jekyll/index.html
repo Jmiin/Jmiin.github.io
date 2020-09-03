@@ -330,7 +330,7 @@
   
       <div class='cover-wrapper post search' style="display: none;">
         
-          <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
+          <div class='cover-backstretch'></div>
         
         <div class='cover-body'>
   <div class='top'>
@@ -639,18 +639,27 @@
   
     <div class="prev-next">
       
-        <a class='prev' href='/2017/10/21/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>递归的时间复杂度</p>
-          <p class='content'>Master定理
-有些算法在处理一个较大规模的问题时，往往会把问题拆分成几个子问题，对其中的一个或多个问题递归地处理，并在分治之前或之后进行一些预处理、汇总处理。这时候我们可以得到关于这个算法复...</p>
+        <a class='prev' href='/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Mysql简笔</p>
+          <p class='content'>启动服务    net start mysql
+    net stop mysql
+​
+
+进入mysql
+输入用户名密码。
+
+        mysql -u 用户名 -p
+        如...</p>
         </a>
       
       
-        <a class='next' href='/2017/10/20/2017-10-20-rose/'>
-          <p class='title'>The Rose<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>The Rose                        Some say love it is a river
+        <a class='next' href='/2017/10/21/2017-10-21-T2%E5%AE%9A%E6%97%B6%E5%99%A8/'>
+          <p class='title'>单片机<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>实验三思考题：
+若系统时钟频率为12MHz，编写软件实现：按一下K键，产生一次外部中断1中断信号，启动T2定时，使P1.1输出周期为2秒的方波。
 
-                        That drowns ...</p>
+
+定时器T2,reg52.h没有T2MOD寄存...</p>
         </a>
       
     </div>
@@ -894,6 +903,47 @@
 
 
 <!-- internal -->
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover-backstretch') {
+          $('.cover-backstretch').backstretch(
+            imgs,
+          {
+            duration: "1000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "1000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
 
 
 
@@ -1632,6 +1682,23 @@
       });
       try{
         pjax_fancybox();
+        
+          
+          if ('.cover-backstretch') {
+            $('.cover-backstretch').backstretch("resize");
+            if($('.cover-wrapper').is(':hidden')){
+              $('.cover-backstretch').backstretch("pause");
+            }else{
+              $('.cover-backstretch').backstretch("next");
+            }
+          } else {
+            $.backstretch("resize");
+            if($('.cover-wrapper').is(':hidden')){
+              $.backstretch("pause");
+            }else{
+              $.backstretch("next");
+            }
+          }
         
         
         
