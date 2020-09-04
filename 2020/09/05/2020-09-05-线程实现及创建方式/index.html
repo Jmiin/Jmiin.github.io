@@ -5,10 +5,6 @@
   <!-- SEO相关 -->
   
     
-      
-        <meta name="robots" content="index,follow">
-      
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -20,11 +16,13 @@
 
   <!-- 页面元数据 -->
   
-  <title>JmiinBlog</title>
+  <title>线程实现及创建方式 - JmiinBlog</title>
+  
+    <meta name="keywords" content="多线程">
   
 
   
-    <meta name="description" content="靡不有初，鲜克有终。">
+    <meta name="description" content="线程实现及创建方式">
   
 
   <!-- feed -->
@@ -334,7 +332,7 @@
 
   
   
-      <div class='cover-wrapper  search' style="display: none;">
+      <div class='cover-wrapper post search' style="display: none;">
         
           <div class='cover-backstretch'></div>
         
@@ -380,8 +378,8 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">线程实现及创建方式</div>
   <div id="pjax-enable-cover">true</div>
   <div id="pjax-comment-path"></div>
   <div id="pjax-comment-placeholder"></div>
@@ -390,14 +388,14 @@
 
 <script>
   // 处理封面 此时 jquery 还没加载
-  if ("full" == "none") { // 移除封面
+  if ("none" == "none") { // 移除封面
     document.getElementsByClassName('cover-wrapper')[0].style.display = "none";
     document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show");
   } else {
-    if ("full" == "half") { // 半屏
+    if ("none" == "half") { // 半屏
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half');
       document.getElementsByClassName('scroll-down')[0].style.display = "none";
-    } else if ("full" == "full") { // 全屏
+    } else if ("none" == "full") { // 全屏
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full');
       document.getElementsByClassName('scroll-down')[0].style.display = "";
     }
@@ -411,562 +409,243 @@
         
 
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
-  <section class="post-list">
+
+
+  
+  <div class="article-meta" id="top">
     
       
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
+
+  
+    <meting-js
+      mini='true'
+      volume='0.5'
+      loop='all'
+      order='list'
+      server='netease'
+      type='song'
+      id='16846091'>
+    </meting-js>
+  
+
+
     
     
-      
+      <a title='线程实现及创建方式' href='/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/'>
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
+          
+            <img class='thumbnail lazyload' src='https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png'>
+          
+        
+      </a>
     
-    <h2 class="article-title" >
-      <a href="/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/">
+    
+      <h1 class="title">
         线程实现及创建方式
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>线程实现及创建方式</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-09-05</time>
+      </h1>
+      <div class='new-meta-box'>
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/">线程实现及创建方式</a>
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/img/1.jpg">
+    <p>Jmiin</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/">线程实现及创建方式</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Sep 5, 2020</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="线程实现及创建方式" data-path="/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <h3 id="线程的基本状态"><a href="#线程的基本状态" class="headerlink" title="线程的基本状态"></a>线程的基本状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> State &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread which has not yet started.</span></span><br><span class="line"><span class="comment">     * 初始状态，线程被构建，但是还没有调用start()方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    NEW,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a runnable thread.  A thread in the runnable</span></span><br><span class="line"><span class="comment">     * state is executing in the Java virtual machine but it may</span></span><br><span class="line"><span class="comment">     * be waiting for other resources from the operating system</span></span><br><span class="line"><span class="comment">     * such as processor.</span></span><br><span class="line"><span class="comment">     * 运行状态，Java线程将操作系统中的就绪和运行状态笼统的称作：运行中</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    RUNNABLE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread blocked waiting for a monitor lock.</span></span><br><span class="line"><span class="comment">     * A thread in the blocked state is waiting for a monitor lock</span></span><br><span class="line"><span class="comment">     * to enter a synchronized block/method or</span></span><br><span class="line"><span class="comment">     * reenter a synchronized block/method after calling</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125;.</span></span><br><span class="line"><span class="comment">   	 * 阻塞状态，表示线程阻塞于锁</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    BLOCKED,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread.</span></span><br><span class="line"><span class="comment">     * A thread is in the waiting state due to calling one of the</span></span><br><span class="line"><span class="comment">     * following methods:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join() Thread.join&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#park() LockSupport.park&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;A thread in the waiting state is waiting for another thread to</span></span><br><span class="line"><span class="comment">     * perform a particular action.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * For example, a thread that has called &lt;tt&gt;Object.wait()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * on an object is waiting for another thread to call</span></span><br><span class="line"><span class="comment">     * &lt;tt&gt;Object.notify()&lt;/tt&gt; or &lt;tt&gt;Object.notifyAll()&lt;/tt&gt; on</span></span><br><span class="line"><span class="comment">     * that object. A thread that has called &lt;tt&gt;Thread.join()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * is waiting for a specified thread to terminate.</span></span><br><span class="line"><span class="comment">     * 等待状态，表示线程进入等待状态，进入该状态表示当前线程需要等待其它线程做出一些特定的动作</span></span><br><span class="line"><span class="comment">     *(通知或中断)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread with a specified waiting time.</span></span><br><span class="line"><span class="comment">     * A thread is in the timed waiting state due to calling one of</span></span><br><span class="line"><span class="comment">     * the following methods with a specified positive waiting time:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #sleep Thread.sleep&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait(long) Object.wait&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join(long) Thread.join&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkNanos LockSupport.parkNanos&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkUntil LockSupport.parkUntil&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     * 超时等待状态，该状态不同于WAITING，它是可以在指定时间自行返回的</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TIMED_WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a terminated thread.</span></span><br><span class="line"><span class="comment">     * The thread has completed execution.</span></span><br><span class="line"><span class="comment">     * 终止状态，表示当前线程已经执行完毕</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TERMINATED;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>线程并不是始终固定于某一个状态而是随着代码的执行在不同状态之间进行切换的。</p>
+<p><img src="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-status-convert.png" class="lazyload" data-srcset="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-status-convert.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<hr>
+<h3 id="线程的创建方式"><a href="#线程的创建方式" class="headerlink" title="线程的创建方式"></a>线程的创建方式</h3><h4 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h4><h4 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h4><h4 id="ExecutorService、Callable-lt-gt"><a href="#ExecutorService、Callable-lt-gt" class="headerlink" title="ExecutorService、Callable&lt;&gt;"></a>ExecutorService、Callable&lt;&gt;</h4><h4 id="基于线程池的方式"><a href="#基于线程池的方式" class="headerlink" title="基于线程池的方式"></a>基于线程池的方式</h4>
+  
+    
+    <div class='footer'>
       
-        <div>
-            <a class='readmore' href='/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/'>
-            Read More
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客转载请标明出处! </p>
+
+              
+            
+              
+                <p><a href=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/>http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-04T10:51:55+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 4, 2020</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
+          
   
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
-        进程与线程
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>多线程始终如一</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-09-05</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">进程与线程</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>多线程</p></a></div>
 
-</div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/09/03/2020-09-03-java%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/">
-        Java常用关键字
-      </a>
-    </h2>
-  
-  <div class='md'>
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
       
-        ​    
-final 关键字final关键字，意思是最终的、不可修改的，最见不得变化 ，用来修饰类、方法和变量，具有以下特点：
-
-final修饰的类不能被继承，final类中的所有成员方法都会被隐式的指定为final方法；
-
-final修饰的方法不能被重写；
-
-final修饰的变量是常量，如果是基本数据类型的变量，则其数值一旦在初始化之后便不能更改；如果是引用类型的变量，则在对其初始化之后...
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
       
     
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-09-03</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2020/09/03/2020-09-03-java%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
 </div>
 
-          </div>
+
+
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/09/01/2020-09-01-%E9%9B%86%E5%90%88/">
-        集合概览
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
+    </div>
   </div>
+
+
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-09-01</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/Java%E9%9B%86%E5%90%88/">Java集合</a>
-        
-      </div>
+  
+
+  
+    <div class="prev-next">
       
-        <div>
-            <a class='readmore' href='/2020/09/01/2020-09-01-%E9%9B%86%E5%90%88/'>
-            Read More
-          </a>
-        </div>
+      
+        <a class='next' href='/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/'>
+          <p class='title'>进程与线程<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>进程与线程基本概念
+一切都是为了提高系统资源利用率，提高系统吞吐量而生。
+
+背景最初的时候的计算机完全由用户输入的指令控制执行，当用户停止时，计算机也会停止。这样效率及其低下。尽管后面出来的批处...</p>
+        </a>
       
     </div>
   
+</article>
 
-</div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
   
-  
-  
-  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
     
-    <h2 class="article-title" >
-      <a href="/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/">
-        生活很苦，人生不苦!
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <p>重新启程</p>
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-06-16</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%96%B0%E7%94%9F/">新生</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2020/06/16/2020-06-16-%E9%87%8D%E6%96%B0%E5%90%AF%E7%A8%8B/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
+    <div id="gitalk-container"></div>
 
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
-        Mysql简笔
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        启动服务    net start mysql
-    net stop mysql
-​
-
-进入mysql
-输入用户名密码。
-
-        mysql -u 用户名 -p
-        如：mysql -u root -p
-效果如下：
-
-查看基本命令
-每条命令结束后一定要加分号
-
-1.show databases; 查看数据库
-
-2.use 数据库;  选择数据库并使用它
-
-这里我提前...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-24</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/24/2017-10-24-Mysql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/24/2017-10-24-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
-        动态规划
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        什么是动态规划（DP）？
- DP起源于运筹学，是求解决策过程最优化的数学方法，它一种是将多阶段过程转化为一系列单阶段问题，再利用各阶段之间的关系，逐个求解的方法。即动态规划算法通常基于一个递推公式及一个或多个初始状态。当前子问题的解将由上一次子问题的解推出。使用动态规划来解题只需要多项式时间复杂度，因此它比回溯法、暴力法等要快许多。
-
-动态规划干什么用？
-求解决策过程最优化。因此动态规划算法...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-24</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/24/2017-10-24-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/21/2017-10-21-T2%E5%AE%9A%E6%97%B6%E5%99%A8/">
-        单片机
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        实验三思考题：
-若系统时钟频率为12MHz，编写软件实现：按一下K键，产生一次外部中断1中断信号，启动T2定时，使P1.1输出周期为2秒的方波。
+  </article>
 
 
-定时器T2,reg52.h没有T2MOD寄存器,regx55.h有T2MOD寄存器而且sbit已经定义。因此头文件用reg55.h。
-参考代码:123456789101112131415161718192021222324252627#incl...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-21</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%A4%A7%E5%AD%A6%E6%97%B6%E5%85%89/">大学时光</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/21/2017-10-21-T2%E5%AE%9A%E6%97%B6%E5%99%A8/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/21/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/">
-        递归的时间复杂度
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Master定理
-有些算法在处理一个较大规模的问题时，往往会把问题拆分成几个子问题，对其中的一个或多个问题递归地处理，并在分治之前或之后进行一些预处理、汇总处理。这时候我们可以得到关于这个算法复杂度的一个递推方程，求解此方程便能得到算法的复杂度。其中很常见的一种递推方程就是这样的：
-
-设常数a &gt;= 1，b &gt; 1，f(n)为函数，T(n)为非负整数，T(n) = a T(n /...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-21</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/21/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2017/10/21/2017-10-21-jekyll/">
-        Jekyll
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Jekyll
-Jekyll网站的目录结构。
 
 
-.
-├── _config.yml
-├── _data
-|   └── members.yml
-├── _drafts
-|   ├── begin-with-the-crazy-ideas.md
-|   └── on-simplicity-in-technology.md
-├── _includes
-|   ├── footer.html
-| ...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2017-10-21</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%9A%82%E6%9C%AA%E5%88%86%E7%B1%BB/">暂未分类</a>
-        
-      </div>
-      
-        <div>
-            <a class='readmore' href='/2017/10/21/2017-10-21-jekyll/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-      <br>
-      <div class="prev-next">
-        
-        <p class="current">
-          1 / 2
-        </p>
-        
-          <a class="next" rel="next" href="/page/2/">
-            <section class="post next white-box shadow">
-              &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
-    
-  
 
 
 </div>
@@ -976,171 +655,22 @@ Jekyll网站的目录结构。
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/img/1.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>靡不有初，鲜克有终</p>
 
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Jmiin"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
-
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/" href="/categories/Java%E5%9F%BA%E7%A1%80/"
-            id="categoriesJavaE59FBAE7A180"
-            ><div class='name'>Java基础</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/Java%E9%9B%86%E5%90%88/" href="/categories/Java%E5%9F%BA%E7%A1%80/Java%E9%9B%86%E5%90%88/"
-            id="categoriesJavaE59FBAE7A180JavaE99B86E59088"
-            ><div class='name'>Java集合</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
-            id="categoriesJavaE59FBAE7A180E5A49AE7BABFE7A88B"
-            ><div class='name'>多线程</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/"
-            id="categoriesJavaE59FBAE7A180E5A49AE7BABFE7A88BE7BABFE7A88BE5AE9EE78EB0E58F8AE5889BE5BBBAE696B9E5BC8F"
-            ><div class='name'>线程实现及创建方式</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"
-            id="categoriesJavaE59FBAE7A180E5A49AE7BABFE7A88BE8BF9BE7A88BE4B88EE7BABFE7A88B"
-            ><div class='name'>进程与线程</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%A7%E5%AD%A6%E6%97%B6%E5%85%89/" href="/categories/%E5%A4%A7%E5%AD%A6%E6%97%B6%E5%85%89/"
-            id="categoriesE5A4A7E5ADA6E697B6E58589"
-            ><div class='name'>大学时光</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"
-            id="categoriesE695B0E68DAEE5BA93"
-            ><div class='name'>数据库</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%96%B0%E7%94%9F/" href="/categories/%E6%96%B0%E7%94%9F/"
-            id="categoriesE696B0E7949F"
-            ><div class='name'>新生</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9A%82%E6%9C%AA%E5%88%86%E7%B1%BB/" href="/categories/%E6%9A%82%E6%9C%AA%E5%88%86%E7%B1%BB/"
-            id="categoriesE69A82E69CAAE58886E7B1BB"
-            ><div class='name'>暂未分类</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%AE%97%E6%B3%95/" href="/categories/%E7%AE%97%E6%B3%95/"
-            id="categoriesE7AE97E6B395"
-            ><div class='name'>算法</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%AF%97%E6%AD%8C/" href="/categories/%E8%AF%97%E6%AD%8C/"
-            id="categoriesE8AF97E6AD8C"
-            ><div class='name'>诗歌</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%8A%B6%E6%80%81"><span class="toc-text">线程的基本状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="toc-text">线程的创建方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E6%89%BFThread%E7%B1%BB"><span class="toc-text">继承Thread类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0Runnable%E6%8E%A5%E5%8F%A3"><span class="toc-text">实现Runnable接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ExecutorService%E3%80%81Callable-lt-gt"><span class="toc-text">ExecutorService、Callable&lt;&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">基于线程池的方式</span></a></li></ol></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Algorithms/" style="font-size: 19px; color: #777">Algorithms</a> <a href="/tags/Java%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/" style="font-size: 14px; color: #999">Java常用关键字</a> <a href="/tags/Java%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">Java集合</a> <a href="/tags/Mysql/" style="font-size: 14px; color: #999">Mysql</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 14px; color: #999">单片机</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 19px; color: #777">多线程</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 24px; color: #555">生活</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 14px; color: #999">科技</a>
-    </div>
-  </section>
-
-
-  
 
   
 

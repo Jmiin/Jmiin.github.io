@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>多线程</title>
-      <link href="/2020/09/05/2020-09-05-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-      <url>/2020/09/05/2020-09-05-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+      <title>线程实现及创建方式</title>
+      <link href="/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/"/>
+      <url>/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h3 id="线程的基本状态"><a href="#线程的基本状态" class="headerlink" title="线程的基本状态"></a>线程的基本状态</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> State &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread which has not yet started.</span></span><br><span class="line"><span class="comment">     * 初始状态，线程被构建，但是还没有调用start()方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    NEW,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a runnable thread.  A thread in the runnable</span></span><br><span class="line"><span class="comment">     * state is executing in the Java virtual machine but it may</span></span><br><span class="line"><span class="comment">     * be waiting for other resources from the operating system</span></span><br><span class="line"><span class="comment">     * such as processor.</span></span><br><span class="line"><span class="comment">     * 运行状态，Java线程将操作系统中的就绪和运行状态笼统的称作：运行中</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    RUNNABLE,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a thread blocked waiting for a monitor lock.</span></span><br><span class="line"><span class="comment">     * A thread in the blocked state is waiting for a monitor lock</span></span><br><span class="line"><span class="comment">     * to enter a synchronized block/method or</span></span><br><span class="line"><span class="comment">     * reenter a synchronized block/method after calling</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125;.</span></span><br><span class="line"><span class="comment">    * 阻塞状态，表示线程阻塞于锁</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    BLOCKED,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread.</span></span><br><span class="line"><span class="comment">     * A thread is in the waiting state due to calling one of the</span></span><br><span class="line"><span class="comment">     * following methods:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join() Thread.join&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#park() LockSupport.park&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;A thread in the waiting state is waiting for another thread to</span></span><br><span class="line"><span class="comment">     * perform a particular action.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * For example, a thread that has called &lt;tt&gt;Object.wait()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * on an object is waiting for another thread to call</span></span><br><span class="line"><span class="comment">     * &lt;tt&gt;Object.notify()&lt;/tt&gt; or &lt;tt&gt;Object.notifyAll()&lt;/tt&gt; on</span></span><br><span class="line"><span class="comment">     * that object. A thread that has called &lt;tt&gt;Thread.join()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">     * is waiting for a specified thread to terminate.</span></span><br><span class="line"><span class="comment">     * 等待状态，表示线程进入等待状态，进入该状态表示当前线程需要等待其它线程做出一些特定的动作</span></span><br><span class="line"><span class="comment">     *(通知或中断)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a waiting thread with a specified waiting time.</span></span><br><span class="line"><span class="comment">     * A thread is in the timed waiting state due to calling one of</span></span><br><span class="line"><span class="comment">     * the following methods with a specified positive waiting time:</span></span><br><span class="line"><span class="comment">     * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #sleep Thread.sleep&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait(long) Object.wait&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join(long) Thread.join&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkNanos LockSupport.parkNanos&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkUntil LockSupport.parkUntil&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">     * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">     * 超时等待状态，该状态不同于WAITING，它是可以在指定时间自行返回的</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TIMED_WAITING,</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Thread state for a terminated thread.</span></span><br><span class="line"><span class="comment">     * The thread has completed execution.</span></span><br><span class="line"><span class="comment">     * 终止状态，表示当前线程已经执行完毕</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    TERMINATED;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>线程并不是始终固定于某一个状态而是随着代码的执行在不同状态之间进行切换的。</p><p><img src="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-status-convert.png" class="lazyload" data-srcset="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-status-convert.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p><hr><h3 id="线程的创建方式"><a href="#线程的创建方式" class="headerlink" title="线程的创建方式"></a>线程的创建方式</h3><h4 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h4><h4 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h4><h4 id="ExecutorService、Callable-lt-gt"><a href="#ExecutorService、Callable-lt-gt" class="headerlink" title="ExecutorService、Callable&lt;&gt;"></a>ExecutorService、Callable&lt;&gt;</h4><h4 id="基于线程池的方式"><a href="#基于线程池的方式" class="headerlink" title="基于线程池的方式"></a>基于线程池的方式</h4>]]></content>
       
       
       <categories>
@@ -16,6 +16,37 @@
           <category> Java基础 </category>
           
           <category> 多线程 </category>
+          
+          <category> 线程实现及创建方式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 多线程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>进程与线程</title>
+      <link href="/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
+      <url>/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="进程与线程基本概念"><a href="#进程与线程基本概念" class="headerlink" title="进程与线程基本概念"></a>进程与线程基本概念</h2><blockquote><p>一切都是为了提高系统资源利用率，提高系统吞吐量而生。</p></blockquote><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最初的时候的计算机完全由用户输入的指令控制执行，当用户停止时，计算机也会停止。这样效率及其低下。尽管后面出来的批处理系统可以将指令形成一套连续的流程对计算机进行控制，但是运行方式  <strong>仍然是串行的，内存中永远都是只有一个程序在运行</strong>，所以批处理效率也并不高。 </p><p>内存完全是可以存在多个程序同时进行的。于是，进程由此诞生，进程是程序的⼀次执行过程，是系统运行程序的基本单位，因此进程是动态的，各个进程之间互相不干扰。同时进程保存着程序每一个时刻运行的状态。</p><pre><code>    此时，CPU采用时间片轮询的方式运行进程：如果时间片结束进程还没有执行完毕，则暂停这个进程的运行，并且把CPU分配给其他的进程，这个过程就叫做上下文切换。    它的出现让操作系统的并发成为了可能，虽然并发从宏观上看有多个任务在执⾏，但在事实上，对于单核CPU来说，任意具体时刻都只有⼀个任务在占⽤CPU资源。  </code></pre><h3 id="线程的提出"><a href="#线程的提出" class="headerlink" title="线程的提出"></a>线程的提出</h3><p>进程的出现并不能让人们满足，如果⼀个进程有多个⼦任务时，只能逐个得执行这些子任务，很影响效率。为了同时让这些子任务同时执行，于是线程的提出变成了理所当然，<strong>每个线程负责一个单独的子任务</strong>。</p><blockquote><p>线程与进程相似，但线程是⼀个⽐进程更小的执⾏单位。⼀个进程在其执⾏的过程中可以产生多个线<br>程。与进程不同的是同类的多个线程共享同⼀块内存空间和⼀组系统资源，所以系统在产生⼀个线程，<br>或是在各个线程之间作切换⼯作时，负担要⽐进程小得多，也正因为如此，线程也被称为轻量级进程。   </p></blockquote><p><img src="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-number.png" class="lazyload" data-srcset="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-number.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="一个进程拥有多个线程"></p><hr><h4 id="多线程实现并发的好处"><a href="#多线程实现并发的好处" class="headerlink" title="多线程实现并发的好处"></a>多线程实现并发的好处</h4><p>1.进程间的通信比较复杂，而线程间的通信比较简单，通常情况下，我们需要使用共享资源，这些资源在线程间的通信比较容易。<br>2.进程是重量级的，而线程是轻量级的，故多线程方式的系统开销更小。  </p><h4 id="两者之间的区别"><a href="#两者之间的区别" class="headerlink" title="两者之间的区别"></a>两者之间的区别</h4><p>进程是一个独立的运行环境，而线程是在进程中执行的一个任务。它们本质的区别是<strong>是否单独占有内存地址空间及其它系统资源</strong>：</p><pre><code>1.进程单独占由一定的内存地址空间，它们之间是存在内存隔离，数据是分开的，数据共享复杂但是同步简单各个进程之间互不干扰；而线程共享所属进程占用的内存地址空间和资源，数据共享简单，但是同步复杂。2.进程单独占有一定的内存地址空间，一个进程出现问题不会影响其它进程，不影响主程序的稳定性，可靠性高；一个线程奔溃可能影响整个程序的稳定性，可靠性低。3.进程单独占有一定的内存地址空间，进程的创建和销毁不仅仅需要保存寄存器和栈信息，还需要资源的分配回收以及页调度，开销大；线程只需要保存寄存器和栈信息，开销小。</code></pre><blockquote><p> <strong>进程是操作系统进行资源分配的基本单位，而线程是操作系统进行调度的基本单位，即CPU分配时间的单位。</strong></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java基础 </category>
+          
+          <category> 多线程 </category>
+          
+          <category> 进程与线程 </category>
           
       </categories>
       
@@ -183,31 +214,6 @@
     
     
     <entry>
-      <title>Jekyll</title>
-      <link href="/2017/10/21/2017-10-21-jekyll/"/>
-      <url>/2017/10/21/2017-10-21-jekyll/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Jekyll"><a href="#Jekyll" class="headerlink" title="Jekyll"></a>Jekyll</h2><blockquote><p>Jekyll网站的目录结构。</p></blockquote><hr><pre><code>.├── _config.yml├── _data|   └── members.yml├── _drafts|   ├── begin-with-the-crazy-ideas.md|   └── on-simplicity-in-technology.md├── _includes|   ├── footer.html|   └── header.html├── _layouts|   ├── default.html|   └── post.html├── _posts|   ├── 2007-10-29-why-every-programmer-should-play-nethack.md|   └── 2009-04-26-barcamp-boston-4-roundup.md├── _sass|   ├── _base.scss|   └── _layout.scss├── _site├── .jekyll-metadata└── index.html # can also be an &#39;index.md&#39; with valid YAML Frontmatter</code></pre><hr><h2 id="test2"><a href="#test2" class="headerlink" title="test2"></a>test2</h2><table><thead><tr><th>Tables</th><th align="center">Are</th><th align="right">Cool</th></tr></thead><tbody><tr><td>col 3 is</td><td align="center">right-aligned</td><td align="right">$1600</td></tr><tr><td>col 2 is</td><td align="center">centered</td><td align="right">$12</td></tr><tr><td>zebra stripes</td><td align="center">are neat</td><td align="right">$1</td></tr></tbody></table><p><a href="https://jekyllrb.com/docs/structure/">原文链接</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 暂未分类 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 科技 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>递归的时间复杂度</title>
       <link href="/2017/10/21/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/"/>
       <url>/2017/10/21/2017-10-21-%E9%80%92%E5%BD%92%E6%A0%91/</url>
@@ -233,11 +239,36 @@
     
     
     <entry>
-      <title>The Rose</title>
-      <link href="/2017/10/20/2017-10-20-rose/"/>
-      <url>/2017/10/20/2017-10-20-rose/</url>
+      <title>Jekyll</title>
+      <link href="/2017/10/21/2017-10-21-jekyll/"/>
+      <url>/2017/10/21/2017-10-21-jekyll/</url>
       
-        <content type="html"><![CDATA[<h2 id="The-Rose"><a href="#The-Rose" class="headerlink" title="The Rose"></a>The Rose</h2><pre><code>                        Some say love it is a river                        That drowns the tender reed                        Some say love it is a razor                        That leaves your soul to bleed                        Some say love it is a hunger                        An endless aching need                        I say love it is a flower                        And you , its only seed                        It&#39;s the heart afraid of breaking                        That never learns to dance                        It&#39;s the dream afraid of waking                        That never takes the chance                        It&#39;s the one who won&#39;t be taken                        Who cannot seem to give                        And the soul afraid of dying                        That never learns to live                        When the night has been too lonely                        And the road has been too long                        And you think that love is only                        For the lucky and the strong                        Just remember in the winter                        Far beneath the bitter snows                        Lies the seed that with the sun&#39;s love                        In the spring becomes the rose</code></pre>]]></content>
+        <content type="html"><![CDATA[<h2 id="Jekyll"><a href="#Jekyll" class="headerlink" title="Jekyll"></a>Jekyll</h2><blockquote><p>Jekyll网站的目录结构。</p></blockquote><hr><pre><code>.├── _config.yml├── _data|   └── members.yml├── _drafts|   ├── begin-with-the-crazy-ideas.md|   └── on-simplicity-in-technology.md├── _includes|   ├── footer.html|   └── header.html├── _layouts|   ├── default.html|   └── post.html├── _posts|   ├── 2007-10-29-why-every-programmer-should-play-nethack.md|   └── 2009-04-26-barcamp-boston-4-roundup.md├── _sass|   ├── _base.scss|   └── _layout.scss├── _site├── .jekyll-metadata└── index.html # can also be an &#39;index.md&#39; with valid YAML Frontmatter</code></pre><hr><h2 id="test2"><a href="#test2" class="headerlink" title="test2"></a>test2</h2><table><thead><tr><th>Tables</th><th align="center">Are</th><th align="right">Cool</th></tr></thead><tbody><tr><td>col 3 is</td><td align="center">right-aligned</td><td align="right">$1600</td></tr><tr><td>col 2 is</td><td align="center">centered</td><td align="right">$12</td></tr><tr><td>zebra stripes</td><td align="center">are neat</td><td align="right">$1</td></tr></tbody></table><p><a href="https://jekyllrb.com/docs/structure/">原文链接</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 暂未分类 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 科技 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>假如生活欺骗了你</title>
+      <link href="/2017/10/20/2017-10-20-%E5%81%87%E5%A6%82%E7%94%9F%E6%B4%BB%E6%AC%BA%E9%AA%97%E4%BA%86%E4%BD%A0/"/>
+      <url>/2017/10/20/2017-10-20-%E5%81%87%E5%A6%82%E7%94%9F%E6%B4%BB%E6%AC%BA%E9%AA%97%E4%BA%86%E4%BD%A0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="假如生活欺骗了你"><a href="#假如生活欺骗了你" class="headerlink" title="假如生活欺骗了你"></a>假如生活欺骗了你</h2><blockquote><p>《假如生活欺骗了你》是俄国诗人普希金于1825年流放南俄敖德萨同当地总督发生冲突后，被押送到其父亲的领地米哈伊洛夫斯科耶村幽禁期间创作的一首诗歌。诗歌全文表述了一种积极乐观而坚强的人生态度，并且因它亲切和蔼的口气让许多人把它记于自己的笔记本上，成为了激励自己勇往直前，永不放弃的座右铭。</p></blockquote><h3 id="If-by-Life-You-Were-Deceived"><a href="#If-by-Life-You-Were-Deceived" class="headerlink" title="If by Life You Were Deceived"></a>If by Life You Were Deceived</h3><pre><code>                        If by life you were deceived,                         Don&#39;t be dismal,don&#39;t be wild!                        In the day of grief,be mild:                        Merry days will come,believe.                        Heart is living in tomorrow;                        Present is dejected here:                        In a moment,passes sorrow;                        That which passes will be dear.</code></pre><hr><h4 id="假如生活欺骗了你-1"><a href="#假如生活欺骗了你-1" class="headerlink" title="假如生活欺骗了你"></a>假如生活欺骗了你</h4><pre><code>                        假如生活欺骗了你，                        不要悲伤，不要心急！                        忧郁的日子里须要镇静：                        相信吧，快乐的日子将会来临！                        心儿永远向往着未来；                        现在却常是忧郁。                        一切都是瞬息，一切都将会过去；                        而那过去了的，就会成为亲切的怀恋。</code></pre>]]></content>
       
       
       <categories>
@@ -258,11 +289,11 @@
     
     
     <entry>
-      <title>假如生活欺骗了你</title>
-      <link href="/2017/10/20/2017-10-20-%E5%81%87%E5%A6%82%E7%94%9F%E6%B4%BB%E6%AC%BA%E9%AA%97%E4%BA%86%E4%BD%A0/"/>
-      <url>/2017/10/20/2017-10-20-%E5%81%87%E5%A6%82%E7%94%9F%E6%B4%BB%E6%AC%BA%E9%AA%97%E4%BA%86%E4%BD%A0/</url>
+      <title>The Rose</title>
+      <link href="/2017/10/20/2017-10-20-rose/"/>
+      <url>/2017/10/20/2017-10-20-rose/</url>
       
-        <content type="html"><![CDATA[<h2 id="假如生活欺骗了你"><a href="#假如生活欺骗了你" class="headerlink" title="假如生活欺骗了你"></a>假如生活欺骗了你</h2><blockquote><p>《假如生活欺骗了你》是俄国诗人普希金于1825年流放南俄敖德萨同当地总督发生冲突后，被押送到其父亲的领地米哈伊洛夫斯科耶村幽禁期间创作的一首诗歌。诗歌全文表述了一种积极乐观而坚强的人生态度，并且因它亲切和蔼的口气让许多人把它记于自己的笔记本上，成为了激励自己勇往直前，永不放弃的座右铭。</p></blockquote><h3 id="If-by-Life-You-Were-Deceived"><a href="#If-by-Life-You-Were-Deceived" class="headerlink" title="If by Life You Were Deceived"></a>If by Life You Were Deceived</h3><pre><code>                        If by life you were deceived,                         Don&#39;t be dismal,don&#39;t be wild!                        In the day of grief,be mild:                        Merry days will come,believe.                        Heart is living in tomorrow;                        Present is dejected here:                        In a moment,passes sorrow;                        That which passes will be dear.</code></pre><hr><h4 id="假如生活欺骗了你-1"><a href="#假如生活欺骗了你-1" class="headerlink" title="假如生活欺骗了你"></a>假如生活欺骗了你</h4><pre><code>                        假如生活欺骗了你，                        不要悲伤，不要心急！                        忧郁的日子里须要镇静：                        相信吧，快乐的日子将会来临！                        心儿永远向往着未来；                        现在却常是忧郁。                        一切都是瞬息，一切都将会过去；                        而那过去了的，就会成为亲切的怀恋。</code></pre>]]></content>
+        <content type="html"><![CDATA[<h2 id="The-Rose"><a href="#The-Rose" class="headerlink" title="The Rose"></a>The Rose</h2><pre><code>                        Some say love it is a river                        That drowns the tender reed                        Some say love it is a razor                        That leaves your soul to bleed                        Some say love it is a hunger                        An endless aching need                        I say love it is a flower                        And you , its only seed                        It&#39;s the heart afraid of breaking                        That never learns to dance                        It&#39;s the dream afraid of waking                        That never takes the chance                        It&#39;s the one who won&#39;t be taken                        Who cannot seem to give                        And the soul afraid of dying                        That never learns to live                        When the night has been too lonely                        And the road has been too long                        And you think that love is only                        For the lucky and the strong                        Just remember in the winter                        Far beneath the bitter snows                        Lies the seed that with the sun&#39;s love                        In the spring becomes the rose</code></pre>]]></content>
       
       
       <categories>
