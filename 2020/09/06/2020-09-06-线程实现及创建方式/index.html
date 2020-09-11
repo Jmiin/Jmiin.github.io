@@ -417,7 +417,7 @@
   <div class="article-meta" id="top">
     
     
-      <a title='线程实现及创建方式' href='/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/'>
+      <a title='线程实现及创建方式' href='/2020/09/06/2020-09-06-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/'>
         
           
             <img class='thumbnail lazyload' src='https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png'>
@@ -458,7 +458,7 @@
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 5, 2020</p>
+    <p>发布于：Sep 6, 2020</p>
   </a>
 </div>
 
@@ -469,7 +469,7 @@
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="线程实现及创建方式" data-path="/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/">
+      <div id="lc-pv" data-title="线程实现及创建方式" data-path="/2020/09/06/2020-09-06-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -644,14 +644,74 @@
 <p>可以参考这4个实体类的源码，饱和后的操作都是实现<code>rejectedExecution(Runnable r,ThreadPoolExecutor executor)</code>方法 ，它们都是<code>ThreadPoolExecutor</code> 的静态内部类：</p>
 <ol>
 <li>ThreadPoolExecutor.AbortPolicy ：抛出 RejectedExecutionException 来拒绝新任<br>务的处理 。</li>
-<li>ThreadPoolExecutor.CallerRunsPolicy ：调用执行当前传入的线程进行运行。但是这种策略会降低对于新任务提交速度，影响程序的整体性能。另外，这个策略喜欢增加队列容量。如果应用程序可以承受此延迟并且不能丢弃任何⼀个任务请求的话，你可以选择这个策略。  </li>
+<li>ThreadPoolExecutor.CallerRunsPolicy ：简单点说就是后面<strong>排队</strong>的线程就在那儿等着。调用执行当前传入的线程进行运行。但是这种策略会降低对于新任务提交速度，影响程序的整体性能。另外，这个策略喜欢增加队列容量。如果应用程序可以承受此延迟并且不能丢弃任何⼀个任务请求的话，你可以选择这个策略。  </li>
 <li>ThreadPoolExecutor.DiscardPolicy ： 不处理新任务，直接丢弃掉。  </li>
 <li>ThreadPoolExecutor.DiscardOldestPolicy ： 此策略将丢弃最早的未处理的任务请求。  </li>
 </ol>
 </blockquote>
 </blockquote>
 <hr>
-<h5 id="线程池主要的任务处理流程-重要"><a href="#线程池主要的任务处理流程-重要" class="headerlink" title="线程池主要的任务处理流程 (重要)"></a>线程池主要的任务处理流程 (重要)</h5>
+<h5 id="线程池主要的任务处理流程-重要"><a href="#线程池主要的任务处理流程-重要" class="headerlink" title="线程池主要的任务处理流程 (重要)"></a>线程池主要的任务处理流程 (重要)</h5><p><img src="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/threadPool-shiyi-imag.png" class="lazyload" data-srcset="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/threadPool-shiyi-imag.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="线程池执行示意图"></p>
+<p>当线程池接收到一个任务时，主要是通过源码中的<code>execute()</code>方法去执行的；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(Runnable command)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (command == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         * Proceed in 3 steps:</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * 1. If fewer than corePoolSize threads are running, try to</span></span><br><span class="line"><span class="comment">         * start a new thread with the given command as its first</span></span><br><span class="line"><span class="comment">         * task.  The call to addWorker atomically checks runState and</span></span><br><span class="line"><span class="comment">         * workerCount, and so prevents false alarms that would add</span></span><br><span class="line"><span class="comment">         * threads when it shouldn&#x27;t, by returning false.</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * 2. If a task can be successfully queued, then we still need</span></span><br><span class="line"><span class="comment">         * to double-check whether we should have added a thread</span></span><br><span class="line"><span class="comment">         * (because existing ones died since last checking) or that</span></span><br><span class="line"><span class="comment">         * the pool shut down since entry into this method. So we</span></span><br><span class="line"><span class="comment">         * recheck state and if necessary roll back the enqueuing if</span></span><br><span class="line"><span class="comment">         * stopped, or start a new thread if there are none.</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * 3. If we cannot queue task, then we try to add a new</span></span><br><span class="line"><span class="comment">         * thread.  If it fails, we know we are shut down or saturated</span></span><br><span class="line"><span class="comment">         * and so reject the task.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">       <span class="comment">// 1.当前线程数⼩于corePoolSize,则调⽤addWorker创建核⼼线程执行任务</span></span><br><span class="line">        <span class="keyword">if</span> (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">            <span class="keyword">if</span> (addWorker(command, <span class="keyword">true</span>))</span><br><span class="line">           		 <span class="keyword">return</span>;</span><br><span class="line">            c = ctl.get();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 2.如果不⼩于corePoolSize，则将任务添加到workQueue队列。</span></span><br><span class="line">        <span class="keyword">if</span> (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">            <span class="keyword">int</span> recheck = ctl.get();</span><br><span class="line">            <span class="comment">// 2.1 如果isRunning返回false(状态检查)，则remove这个任务，然后执行饱和策略。</span></span><br><span class="line">            <span class="keyword">if</span> (! isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">           		reject(command);</span><br><span class="line">            <span class="comment">// 2.2 线程池处于running状态，但是没有线程，则创建线程</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (workerCountOf(recheck) == <span class="number">0</span>)</span><br><span class="line">            	addWorker(<span class="keyword">null</span>, <span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3.如果放⼊workQueue失败，则创建非核⼼线程执⾏任务，</span></span><br><span class="line">        <span class="comment">// 如果这时创建非核⼼线程失败(当前线程总数不⼩于maximumPoolSize时)，就会执行饱和策略。</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (!addWorker(command, <span class="keyword">false</span>))</span><br><span class="line">        	reject(command);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>主要分为3步：</p>
+<p>1、线程池判断核心线程池里的线程是否都在执行任务。如果不是，则创建一个新的工作线程来执行任务。如果核心线程池里的线程都在执行任务，则进入下个流程。<br>2、线程池判断工作队列是否已经满。如果工作队列没有满，则将新提交的任务存储在这个工作队列里。如果工作队列满了，则进入下个流程。<br>3、线程池判断线程池的线程是否都处于工作状态。如果没有，则创建一个新的工作线程来执行任务。如果已经满了，则交给饱和策略来处理这个任务。</p>
+</blockquote>
+<p><img src="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-0101.png" class="lazyload" data-srcset="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/thread-0101.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<p>实例演示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolExecutorDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最大核心线程数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CORE_POOL_SIZE = <span class="number">5</span>;</span><br><span class="line">    <span class="comment">// 最大线程数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXINUM_POOL_SIZE = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">// 最大队列长度</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> QUEUE_CAPACITY = <span class="number">100</span>;</span><br><span class="line">    <span class="comment">// 非核心线程闲置超时时间</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Long KEEP_ALIVE_TIME = <span class="number">1L</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ThreadPoolExecutor executor = <span class="keyword">new</span> ThreadPoolExecutor(CORE_POOL_SIZE,</span><br><span class="line">                MAXINUM_POOL_SIZE,</span><br><span class="line">                KEEP_ALIVE_TIME,</span><br><span class="line">                TimeUnit.SECONDS,</span><br><span class="line">                <span class="keyword">new</span> ArrayBlockingQueue&lt;&gt;(QUEUE_CAPACITY),</span><br><span class="line">                Executors.defaultThreadFactory(),</span><br><span class="line">                <span class="keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1. 线程总数量 &lt; corePoolSize，无论线程是否空闲，都会新建一个核心线程执行</span></span><br><span class="line">        <span class="comment">//任务（让核心线程数量快速达到corePoolSize，在核心线程数量 &lt;corePoolSize时）。</span></span><br><span class="line">        <span class="comment">// 注意，这一步需要获得全局锁。</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//2. 线程总数量 &gt;= corePoolSize时，新来的线程任务会进入任务队列中等待，然</span></span><br><span class="line">        <span class="comment">//后空闲的核心线程会依次去缓存队列中取任务来执行（体现了线程复用）。</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//3. 当缓存队列满了，说明这个时候任务已经多到爆棚，需要一些“临时工”来执行</span></span><br><span class="line">        <span class="comment">//这些任务了。于是会创建非核心线程去执行这个任务。注意，这一步需要获得</span></span><br><span class="line">        <span class="comment">//全局锁。</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//4. 缓存队列满了， 且总线程数达到了maximumPoolSize，则会采取上面提到的</span></span><br><span class="line">        <span class="comment">//饱和策略进行处理。</span></span><br><span class="line">        <span class="comment">//最大任务数</span></span><br><span class="line">        <span class="keyword">int</span> maxTask = <span class="number">1000</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; maxTask; i++) &#123;</span><br><span class="line">           Runnable task = ()-&gt;&#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot; Start.Time = &quot;</span> +<span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;HH:mm:ss&quot;</span>).format(<span class="keyword">new</span> Date()));</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot; End.Time = &quot;</span> + <span class="keyword">new</span> SimpleDateFormat(<span class="string">&quot;HH:mm:ss&quot;</span>).format(<span class="keyword">new</span> Date()));</span><br><span class="line">            &#125;;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 执行Runnable</span></span><br><span class="line">            executor.execute(task);</span><br><span class="line">        &#125;</span><br><span class="line">        executor.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>1. 当maxTask小于缓存队列的长度时(如：maxTask = 10)，线程池不需要创建非核心线程来处理任务
+    运行结果：
+    pool-1-thread-2 Start.Time = 09:25:19
+    pool-1-thread-3 Start.Time = 09:25:19
+    pool-1-thread-5 Start.Time = 09:25:19
+    pool-1-thread-4 Start.Time = 09:25:19
+    pool-1-thread-1 Start.Time = 09:25:19
+    pool-1-thread-1 End.Time = 09:25:21
+    pool-1-thread-2 End.Time = 09:25:21
+    pool-1-thread-4 End.Time = 09:25:21
+    pool-1-thread-3 End.Time = 09:25:21
+    pool-1-thread-5 End.Time = 09:25:21
+    pool-1-thread-4 Start.Time = 09:25:21
+    pool-1-thread-3 Start.Time = 09:25:21
+    pool-1-thread-2 Start.Time = 09:25:21
+    pool-1-thread-1 Start.Time = 09:25:21
+    pool-1-thread-5 Start.Time = 09:25:21
+    pool-1-thread-3 End.Time = 09:25:23
+    pool-1-thread-5 End.Time = 09:25:23
+    pool-1-thread-1 End.Time = 09:25:23
+    pool-1-thread-2 End.Time = 09:25:23
+    pool-1-thread-4 End.Time = 09:25:23
+
+    Process finished with exit code 0
+
+2. 当maxTask大于缓存队列的长度时(如：maxTask = 210)，线程池不需要创建非核心线程来处理任务
+    运行结果为：
+    pool-1-thread-10 Start.Time = 09:26:56
+    pool-1-thread-7 Start.Time = 09:26:56
+    pool-1-thread-1 Start.Time = 09:26:56
+    pool-1-thread-9 Start.Time = 09:26:56
+    pool-1-thread-8 Start.Time = 09:26:56
+    pool-1-thread-2 Start.Time = 09:26:56
+    pool-1-thread-4 Start.Time = 09:26:56
+    pool-1-thread-6 Start.Time = 09:26:56
+    main Start.Time = 09:26:56
+    pool-1-thread-3 Start.Time = 09:26:56
+    pool-1-thread-5 Start.Time = 09:26:56
+    pool-1-thread-5 End.Time = 09:26:58
+    pool-1-thread-3 End.Time = 09:26:58
+    pool-1-thread-1 End.Time = 09:26:58
+    pool-1-thread-6 End.Time = 09:26:58
+    pool-1-thread-9 End.Time = 09:26:58
+    ......</code></pre>
+
   
     
     <div class='footer'>
@@ -667,7 +727,7 @@
               
             
               
-                <p><a href=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/>http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/</a></p>
+                <p><a href=http://jmiin.github.io/2020/09/06/2020-09-06-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/>http://jmiin.github.io/2020/09/06/2020-09-06-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/</a></p>
               
             
           </blockquote>
@@ -684,10 +744,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-08T16:37:08+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-11T09:31:48+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Sep 8, 2020</p>
+    <p>更新于：Sep 11, 2020</p>
   </a>
 </div>
 
@@ -709,7 +769,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://jmiin.github.io/2020/09/06/2020-09-06-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
           
           >
           
@@ -721,7 +781,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://jmiin.github.io/2020/09/06/2020-09-06-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
           
           >
           
@@ -733,7 +793,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://jmiin.github.io/2020/09/05/2020-09-05-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://jmiin.github.io/2020/09/06/2020-09-06-%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/&title=线程实现及创建方式 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
           
           >
           
@@ -763,26 +823,29 @@
   
     <div class="prev-next">
       
-        <a class='prev' href='/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>进程与线程</p>
+      
+        <a class='next' href='/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/'>
+          <p class='title'>进程与线程<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>进程与线程基本概念
 一切都是为了提高系统资源利用率，提高系统吞吐量而生。
 
 背景最初的时候的计算机完全由用户输入的指令控制执行，当用户停止时，计算机也会停止。这样效率及其低下。尽管后面出来的批处...</p>
         </a>
       
-      
-        <a class='next' href='/2020/09/03/2020-09-03-java%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/'>
-          <p class='title'>Java常用关键字<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>​    
-final 关键字final关键字，意思是最终的、不可修改的，最见不得变化 ，用来修饰类、方法和变量，具有以下特点：
-
-final修饰的类不能被继承，final类中的所有成员方法都会...</p>
-        </a>
-      
     </div>
   
 </article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="gitalk-container"></div>
+
+  </article>
+
 
 
 
