@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,7 +16,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Category: 进程与线程 - JmiinBlog</title>
+  <title>并发底层实现原理 - JmiinBlog</title>
+  
+    <meta name="keywords" content="多线程">
   
 
   
@@ -330,7 +330,7 @@
 
   
   
-      <div class='cover-wrapper  search' style="display: none;">
+      <div class='cover-wrapper post search' style="display: none;">
         
           <div class='cover-backstretch'></div>
         
@@ -376,8 +376,8 @@
 
 
 <div id="pjax-data" style="display: none">
-  <div id="pjax-ispage">false</div>
-  <div id="pjax-pageTitle"></div>
+  <div id="pjax-ispage">true</div>
+  <div id="pjax-pageTitle">并发底层实现原理</div>
   <div id="pjax-enable-cover">true</div>
   <div id="pjax-comment-path"></div>
   <div id="pjax-comment-placeholder"></div>
@@ -406,73 +406,227 @@
         
         
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+      <a title='并发底层实现原理' href='/2020/09/12/2020-09-12-%E5%B9%B6%E5%8F%91%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/'>
         
           
+            <img class='thumbnail lazyload' src='https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png'>
+          
         
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">
-        进程与线程
       </a>
-    </h2>
-  
-  <div class='md'>
     
-      <p>多线程始终如一</p>
     
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        <time>2020-09-05</time>
+      <h1 class="title">
+        并发底层实现原理
+      </h1>
+      <div class='new-meta-box'>
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/">Java基础</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a><span class="sep"></span><a class="category-link" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">进程与线程</a>
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/img/1.jpg">
+    <p>Jmiin</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a><span class="sep"></span><a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E5%B9%B6%E5%8F%91%E5%8E%9F%E7%90%86/">并发原理</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Sep 12, 2020</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="并发底层实现原理" data-path="/2020/09/12/2020-09-12-%E5%B9%B6%E5%8F%91%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <blockquote>
+<p>Java代码编译后形成字节码文件，字节码被类加载器加载到JVM中，JVM将字节码转换为汇编指令在CPU上执行，整个过程并发机制的实现全部依赖于JVM和CPU的指令。</p>
+</blockquote>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><h3 id="CAS与原子操纵"><a href="#CAS与原子操纵" class="headerlink" title="CAS与原子操纵"></a>CAS与原子操纵</h3>
+  
+    
+    <div class='footer'>
       
-        <div>
-            <a class='readmore' href='/2020/09/05/2020-09-05-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/'>
-            Read More
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客转载请标明出处! </p>
+
+              
+            
+              
+                <p><a href=http://jmiin.github.io/2020/09/12/2020-09-12-%E5%B9%B6%E5%8F%91%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/>http://jmiin.github.io/2020/09/12/2020-09-12-%E5%B9%B6%E5%8F%91%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-15T11:09:35+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 15, 2020</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>多线程</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://jmiin.github.io/2020/09/12/2020-09-12-%E5%B9%B6%E5%8F%91%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/&title=并发底层实现原理 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://jmiin.github.io/2020/09/12/2020-09-12-%E5%B9%B6%E5%8F%91%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/&title=并发底层实现原理 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://jmiin.github.io/2020/09/12/2020-09-12-%E5%B9%B6%E5%8F%91%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/&title=并发底层实现原理 - JmiinBlog&pics=https://img.vim-cn.com/17/0c7b02722686d1527a1df807dae0794d995860.png&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2020/09/11/2020-09-11-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/'>
+          <p class='title'>单例模式<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>
+
+</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="gitalk-container"></div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -480,181 +634,28 @@
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://blog-image-1301262590.cos.ap-nanjing.myqcloud.com/img/1.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>靡不有初，鲜克有终</p>
 
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Jmiin"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
-
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/" href="/categories/Java%E5%9F%BA%E7%A1%80/"
-            id="categoriesJavaE59FBAE7A180"
-            ><div class='name'>Java基础</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/Java%E9%9B%86%E5%90%88/" href="/categories/Java%E5%9F%BA%E7%A1%80/Java%E9%9B%86%E5%90%88/"
-            id="categoriesJavaE59FBAE7A180JavaE99B86E59088"
-            ><div class='name'>Java集合</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
-            id="categoriesJavaE59FBAE7A180E5A49AE7BABFE7A88B"
-            ><div class='name'>多线程</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F/"
-            id="categoriesJavaE59FBAE7A180E5A49AE7BABFE7A88BE7BABFE7A88BE5AE9EE78EB0E58F8AE5889BE5BBBAE696B9E5BC8F"
-            ><div class='name'>线程实现及创建方式</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%BB%84%E5%8F%8A%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E7%BA%BF%E7%A8%8B%E7%BB%84%E5%8F%8A%E7%BA%BF%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7/"
-            id="categoriesJavaE59FBAE7A180E5A49AE7BABFE7A88BE7BABFE7A88BE7BB84E58F8AE7BABFE7A88BE4BC98E58588E7BAA7"
-            ><div class='name'>线程组及线程优先级</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" href="/categories/Java%E5%9F%BA%E7%A1%80/%E5%A4%9A%E7%BA%BF%E7%A8%8B/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"
-            id="categoriesJavaE59FBAE7A180E5A49AE7BABFE7A88BE8BF9BE7A88BE4B88EE7BABFE7A88B"
-            ><div class='name'>进程与线程</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%A7%E5%AD%A6%E6%97%B6%E5%85%89/" href="/categories/%E5%A4%A7%E5%AD%A6%E6%97%B6%E5%85%89/"
-            id="categoriesE5A4A7E5ADA6E697B6E58589"
-            ><div class='name'>大学时光</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"
-            id="categoriesE695B0E68DAEE5BA93"
-            ><div class='name'>数据库</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%96%B0%E7%94%9F/" href="/categories/%E6%96%B0%E7%94%9F/"
-            id="categoriesE696B0E7949F"
-            ><div class='name'>新生</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9A%82%E6%9C%AA%E5%88%86%E7%B1%BB/" href="/categories/%E6%9A%82%E6%9C%AA%E5%88%86%E7%B1%BB/"
-            id="categoriesE69A82E69CAAE58886E7B1BB"
-            ><div class='name'>暂未分类</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%AE%97%E6%B3%95/" href="/categories/%E7%AE%97%E6%B3%95/"
-            id="categoriesE7AE97E6B395"
-            ><div class='name'>算法</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%AF%97%E6%AD%8C/" href="/categories/%E8%AF%97%E6%AD%8C/"
-            id="categoriesE8AF97E6AD8C"
-            ><div class='name'>诗歌</div><div class='badge'>(2)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#volatile"><span class="toc-number">1.</span> <span class="toc-text">volatile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#synchronized"><span class="toc-number">2.</span> <span class="toc-text">synchronized</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CAS%E4%B8%8E%E5%8E%9F%E5%AD%90%E6%93%8D%E7%BA%B5"><span class="toc-number">3.</span> <span class="toc-text">CAS与原子操纵</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Algorithms/" style="font-size: 19px; color: #777">Algorithms</a> <a href="/tags/Java%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97/" style="font-size: 14px; color: #999">Java常用关键字</a> <a href="/tags/Java%E9%9B%86%E5%90%88/" style="font-size: 14px; color: #999">Java集合</a> <a href="/tags/Mysql/" style="font-size: 14px; color: #999">Mysql</a> <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/" style="font-size: 14px; color: #999">单片机</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 24px; color: #555">多线程</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 24px; color: #555">生活</a> <a href="/tags/%E7%A7%91%E6%8A%80/" style="font-size: 14px; color: #999">科技</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
       </div>
