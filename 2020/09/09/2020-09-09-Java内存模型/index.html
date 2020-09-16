@@ -556,6 +556,8 @@
 <li>监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。</li>
 <li>volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</li>
 <li>传递性：如果A happens-before B且B happens-before C，那么A happens-before C。  </li>
+<li>start规则：如果线程A执⾏操作ThreadB.start()启动线程B，那么A线程的ThreadB.start（）操作happens-before于线程B中的任意操作。</li>
+<li>join规则：如果线程A执⾏操作ThreadB.join（）并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。  </li>
 </ul>
 </blockquote>
 </blockquote>
@@ -603,10 +605,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-15T11:09:29+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-16T11:23:38+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Sep 15, 2020</p>
+    <p>更新于：Sep 16, 2020</p>
   </a>
 </div>
 
@@ -771,9 +773,9 @@
       order='list'
       fixed='false'
       list-max-height='320px'
-      server='netease'
+      server='kugou'
       type='playlist'
-      id='3175833810'
+      id='19210602'
       list-folded='true'>
     </meting-js>
   
@@ -1358,7 +1360,7 @@
 
   <script>
   let APlayerController = new Object();
-  APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+  APlayerController.id = '19210602';  // 设定全局音乐播放ID
   APlayerController.volume = '0.5';
 </script>
 
